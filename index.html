@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compuertas Lógicas</title>
+</head>
+<body>
+    <h1>Simulador de Compuertas Lógicas</h1>
+    <div class="contenedor">
+        <div class="hijo">
+            <h2>Elegí una compuerta</h2>
+            <select id="select">
+                <option value="and">AND</option>
+                <option value="or">OR</option>
+                <option value="not">NOT</option>
+                <option value="nand">NAND</option>
+                <option value="nor">NOR</option>
+                <option value="xor">XOR</option>
+                <option value="xnor">XNOR</option>
+            </select>
+            <h3>Entradas</h3>
+            <div>
+                <input type="checkbox" id="inputA"> A
+                <input type="checkbox" id="inputB"> B
+            </div>
+            <button onclick="calcular()">Calcular</button>
+            <p>Salida: <span id="resultado">false</span></p>
+        </div>
+    </div>
+
+
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #0000FF; 
+        }
+        .contenedor {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.17); 
+            padding: 20px;
+            width: 300px; 
+        }
+        .hijo{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        } 
+        select, button {
+            margin: 10px 0; 
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            border-color: #0000FF;
+            font-size: 16px; 
+        }
+        button {
+            background-color: #0000FF; 
+            color: white; 
+            cursor: pointer; 
+        }
+        button:hover {
+            background-color:#0000FF; /* Color más oscuro al pasar el mouse */
+        }
+        input[type="checkbox"] {
+            appearance: none; /* Elimina el estilo predeterminado del checkbox */
+            width: 20px;
+            height: 20px; 
+            background-color: red;
+            border: 2px solid #ff0000; 
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="checkbox"]:checked {
+            background-color: #03db03; 
+            border-color: #03db03;
+        }
+    </style>
+
+    <script>
+
+        function calcular(){
+            //la propiedad checked devuelve true si el checkbox está marcado y false si no lo está. Así, a y b se convierten en booleanos 
+            const a = document.getElementById("inputA").checked; 
+            const b = document.getElementById("inputB").checked;
+            //Ahora obtenemos el valor elejido en el select
+            const compuerta = document.getElementById("select").value;
+            let salida = document.getElementById("resultado");
+
+            let resultado;
+            switch (compuerta) {
+        case 'and':
+            resultado = a && b;
+            break;
+        case 'or':
+            resultado = a || b;
+            break;
+        case 'not':
+            resultado = !a;
+            break;
+        case 'nand':
+            resultado = !(a && b);
+            break;
+        case 'nor':
+            resultado = !(a || b);
+            break;
+        case 'xor':
+            resultado = a !== b;
+            break;
+        case 'xnor':
+            resultado = a === b;
+            break;
+        default:
+            resultado = false;
+        }
+           salida.textContent = resultado;
+        }
+    </script>
+</body>
+</html>
